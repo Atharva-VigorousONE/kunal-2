@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amazon Sentiment Classifier - Honest Metrics & Explainable NLP</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        
+        <!-- Header -->
+        <header class="panel panel-glow-indigo header">
+            <div class="brand">
+                <div class="status-dot"></div>
+                <div>
+                    <h1>Amazon Sentiment Analyzer</h1>
+                    <p style="font-size: 0.85rem; color: var(--text-secondary);">Honest evaluation metrics & unreliability diagnostics for NLP classifiers</p>
+                </div>
+            </div>
+            <div class="header-actions">
+                <a href="/api/download-presentation" id="downloadPdfBtn" class="btn btn-primary" target="_blank">
+                    <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16" style="vertical-align: middle;">
+                        <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                        <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+                    </svg>
+                    Download Presentation PDF
+                </a>
+            </div>
+        </header>
+
+        <!-- Product Selector Navigation -->
+        <nav class="selector-nav" id="productSelectorNav">
+            <button class="selector-pill active" id="btn-overall" data-product="overall">Overall Amazon Products</button>
+            <button class="selector-pill" id="btn-tap" data-product="Amazon Tap - Alexa-Enabled Portable Bluetooth Speaker">Amazon Tap</button>
+            <button class="selector-pill" id="btn-headphones" data-product="Amazon Premium Headphones">Premium Headphones</button>
+            <button class="selector-pill" id="btn-tv" data-product="Amazon Fire TV">Amazon Fire TV</button>
+            <button class="selector-pill" id="btn-tablet" data-product="Fire HD 6 Tablet">Fire HD 6 Tablet</button>
+            <button class="selector-pill" id="btn-oasis" data-product="Kindle Fire HDX 7\"">Kindle Fire HDX 7"</button>
+        </nav>
+
+        <!-- KPI Grid -->
+        <section class="kpi-grid" id="kpiGrid">
+            <div class="panel kpi-card glow-indigo" id="kpi-accuracy-card">
+                <span class="kpi-label">Accuracy</span>
+                <span class="kpi-value" id="val-accuracy">0.00%</span>
+                <span class="kpi-subtext" id="lbl-samples-count">0 total test samples</span>
+            </div>
+            <div class="panel kpi-card glow-rose" id="kpi-precision-card">
+                <span class="kpi-label">Precision (Negatives)</span>
+                <span class="kpi-value" id="val-precision">0.00%</span>
+                <span class="kpi-subtext">Avoid false positive alarms</span>
+            </div>
+            <div class="panel kpi-card glow-rose" id="kpi-recall-card">
+                <span class="kpi-label">Recall (Negatives)</span>
+                <span class="kpi-value" id="val-recall">0.00%</span>
+                <span class="kpi-subtext">Catch actual negative reviews</span>
+            </div>
+            <div class="panel kpi-card glow-indigo" id="kpi-f1-card">
+                <span class="kpi-label">F1-Score (Negatives)</span>
+                <span class="kpi-value" id="val-f1">0.00%</span>
+                <span class="kpi-subtext">Balanced harmonic mean</span>
+            </div>
+        </section>
+
+        <!-- Tab Selector Container -->
+        <div class="panel" style="padding-bottom: 2rem;">
+            <div class="tab-container">
+                <button class="tab-btn active" id="tabBtnPlayground" onclick="switchTab('playground')">Classifier Playground</button>
+                <button class="tab-btn" id="tabBtnUnreliability" onclick="switchTab('unreliability')">Model Unreliability Report</button>
+                <button class="tab-btn" id="tabBtnExplorer" onclick="switchTab('explorer')">Dataset & Errors Explorer</button>
+            </div>
+
+            <!-- Tab 1: Playground & Metrics -->
+            <div id="tabContentPlayground" class="tab-content active">
+                <div class="dashboard-grid">
+                    
+                    <!-- Left: Inference Sandbox -->
+                    <div class="panel-inner" style="display: flex; flex-direction: column; gap: 1.5rem;">
+                        <h2 style="font-size: 1.3rem; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                            Live Inference Sandbox
+                        </h2>
+                        
+                        <div class="sandbox-input-area">
+                            <label for="reviewInputText" style="font-size: 0.85rem; color: var(--text-secondary);">Type a custom review text or click a template case below to test model limits:</label>
+                            <textarea id="reviewInputText" class="text-area" rows="4" placeholder="Type your review here..."></textarea>
+                            
+                            <div class="sandbox-actions">
+                                <div class="template-selector" id="sandboxTemplates">
+                                    <button class="template-btn" data-text="This fits the Fire tablet nicely, but the stand on the back is so wonky you are better off using a jar of peanut butter and chewing gum to prop it up.">Sarcasm</button>
+                                    <button class="template-btn" data-text="I purchased a refurbished Kindle HD. Arrived in perfect condition, no scratches, works like a champ and no issues whatsoever. Very pleased!">Double Negatives</button>
+                                    <button class="template-btn" data-text="Product is what it is, but the companion app is very slow outside the U.S. and makes it annoying.">Mixed Sentiment</button>
+                                    <button class="template-btn" data-text="Good">Mismatch (Rating 2.0)</button>
+                                    <button class="template-btn" data-text="Bhai bohot badhiya product hai, sound quality is amazing. Fast delivery tha.">Hinglish Review</button>
+                                </div>
+                                <button id="btnAnalyze" class="btn btn-primary" onclick="analyzeSentiment()">
+                                    Analyze Review
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Result Section -->
+                        <div id="sandboxResultContainer" class="sandbox-result">
+                            <div class="result-header">
+                                <div>
+                                    <span style="font-size: 0.9rem; color: var(--text-secondary);">Predicted Sentiment:</span>
+                                    <div style="margin-top: 0.25rem;">
+                                        <span id="badgeSentiment" class="badge">Positive</span>
+                                    </div>
+                                </div>
+                                <div style="text-align: right;">
+                                    <span style="font-size: 0.9rem; color: var(--text-secondary);">Confidence score:</span>
+                                    <div id="lblConfidence" style="font-size: 1.5rem; font-weight: 700; font-family: var(--font-heading);">0.0%</div>
+                                </div>
+                            </div>
+                            
+                            <div class="confidence-bar">
+                                <div id="barConfidenceFill" class="confidence-fill" style="width: 0%"></div>
+                            </div>
+
+                            <!-- Explainable Word Highlights -->
+                            <div style="margin-top: 1.5rem;">
+                                <h4 style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 0.5rem; display: flex; align-items: center; justify-content: space-between;">
+                                    <span>Explainable Feature Attribution (Word Contributions)</span>
+                                    <span style="font-size: 0.75rem; color: var(--text-muted); font-weight: 400;">Hover over words to see weights (Green = Positive, Red = Negative)</span>
+                                </h4>
+                                <div class="explain-visualizer">
+                                    <div id="explainTextRendered" class="explain-text-rendered">
+                                        <!-- Highlighted words dynamically loaded here -->
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Unreliability Warning callouts -->
+                            <div id="warningBox" class="warning-box" style="display: none;">
+                                <!-- Warnings loaded here -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Visualizations (Matrix + Feature Importance) -->
+                    <div class="visualization-panel">
+                        <div class="charts-row">
+                            <!-- Confusion Matrix -->
+                            <div class="chart-card">
+                                <span class="chart-title">Test Set Confusion Matrix</span>
+                                <div class="matrix-container" id="matrixContainer">
+                                    <div class="matrix-corner"></div>
+                                    <div class="matrix-col-label-1">Pred Neg</div>
+                                    <div class="matrix-col-label-2">Pred Pos</div>
+                                    <div class="matrix-row-label-1">True Neg</div>
+                                    <div class="matrix-cell cell-tn" id="cell-tn-box">
+                                        <span class="matrix-value" id="val-tn">0</span>
+                                        <span class="matrix-cell-label">True Neg</span>
+                                    </div>
+                                    <div class="matrix-cell cell-fp" id="cell-fp-box">
+                                        <span class="matrix-value" id="val-fp">0</span>
+                                        <span class="matrix-cell-label">False Pos</span>
+                                    </div>
+                                    <div class="matrix-row-label-2">True Pos</div>
+                                    <div class="matrix-cell cell-fn" id="cell-fn-box">
+                                        <span class="matrix-value" id="val-fn">0</span>
+                                        <span class="matrix-cell-label">False Neg</span>
+                                    </div>
+                                    <div class="matrix-cell cell-tp" id="cell-tp-box">
+                                        <span class="matrix-value" id="val-tp">0</span>
+                                        <span class="matrix-cell-label">True Pos</span>
+                                    </div>
+                                </div>
+                                <p style="font-size: 0.7rem; color: var(--text-muted); margin-top: 0.5rem; text-align: center;">
+                                    Balanced weights prevent the model from ignoring the minority class.
+                                </p>
+                            </div>
+
+                            <!-- Feature Importance -->
+                            <div class="chart-card" style="align-items: stretch;">
+                                <span class="chart-title">Highly Predictive Words</span>
+                                <div style="display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.5rem;">
+                                    <span style="color: var(--color-negative);">Negative</span>
+                                    <span style="color: var(--color-positive);">Positive</span>
+                                </div>
+                                <div class="bar-chart-container" id="barChartContainer">
+                                    <!-- Bar rows dynamically loaded here -->
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Explainability Guide card -->
+                        <div class="panel" style="background: rgba(255,255,255,0.01); border-color: rgba(255,255,255,0.03); margin-top: 0.5rem; padding: 1rem;">
+                            <h4 style="font-size: 0.85rem; margin-bottom: 0.35rem; color: var(--color-primary);">How feature attribution works:</h4>
+                            <p style="font-size: 0.75rem; color: var(--text-secondary); line-height: 1.4;">
+                                Logistic Regression predicts class sentiment using a weighted sum: <code>z = Σ (w_i * tfidf_i) + b</code>. The color intensity represents the product <code>w_i * tfidf_i</code> (word contribution). Green signals words moving the classification towards Positive, and Red signals words pulling it towards Negative.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab 2: Model Unreliability Report -->
+            <div id="tabContentUnreliability" class="tab-content">
+                <div class="unreliability-report-tab">
+                    <p class="unreliability-intro">
+                        Standard NLP text classifiers (like TF-IDF Bag-of-Words with Linear models) assume words contribute to sentiment independently. In practice, real-world customer reviews violate this assumption in predictable ways, making the model unreliable. Here are the 4 primary unreliability vectors in product reviews:
+                    </p>
+
+                    <div class="failure-cards-grid">
+                        <!-- Case 1: Negations -->
+                        <div class="failure-case-card">
+                            <div>
+                                <div class="failure-case-title">1. Negations & Valence Modifiers</div>
+                                <p class="failure-case-desc">
+                                    Standard bag-of-words ignores word order. Phrases like <em>"not bad"</em> or <em>"no issues"</em> contain negative tokens ("bad", "issues") which the model interprets literally, leading to false negatives.
+                                </p>
+                            </div>
+                            <div class="failure-case-example">
+                                "The refurbished Fire HD arrived in perfect condition... and <strong>no issues</strong> whatsoever. <strong>not disappointed</strong>."
+                            </div>
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <span class="failure-case-explanation">Actual: Positive | Predicted: Negative</span>
+                                <button class="btn btn-primary" style="font-size: 0.75rem; padding: 0.3rem 0.65rem;" onclick="loadAndAnalyze('I purchased a refurbished Kindle HD. Arrived in perfect condition, no scratches, works like a champ and no issues whatsoever. Very pleased!')">Test Case</button>
+                            </div>
+                        </div>
+
+                        <!-- Case 2: Sarcasm -->
+                        <div class="failure-case-card">
+                            <div>
+                                <div class="failure-case-title">2. Sarcasm & Irony</div>
+                                <p class="failure-case-desc">
+                                    Sarcastic reviews use highly positive words ("perfect", "genius", "better off") in ironical ways. Since linear classifiers only sum word values, they predict positive confidence.
+                                </p>
+                            </div>
+                            <div class="failure-case-example">
+                                "...the stand on the back is so wonky, you are <strong>better off</strong> just using a jar of peanut butter and a couple pieces of chewing gum..."
+                            </div>
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <span class="failure-case-explanation">Actual: Negative | Predicted: Positive</span>
+                                <button class="btn btn-primary" style="font-size: 0.75rem; padding: 0.3rem 0.65rem;" onclick="loadAndAnalyze('This fits the Fire tablet nicely, but the stand on the back is so wonky you are better off using a jar of peanut butter and chewing gum to prop it up.')">Test Case</button>
+                            </div>
+                        </div>
+
+                        <!-- Case 3: Mixed Sentiment -->
+                        <div class="failure-case-card">
+                            <div>
+                                <div class="failure-case-title">3. Clause Hierarchies & Logistics</div>
+                                <p class="failure-case-desc">
+                                    Customers often praise the product but slam the delivery, app, or price. If the negative portion uses stronger words, the model misclassifies the entire review, ignoring product satisfaction.
+                                </p>
+                            </div>
+                            <div class="failure-case-example">
+                                "I like the product itself <strong>but</strong> its app is <strong>very slow</strong> esp. outside the U.S..."
+                            </div>
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <span class="failure-case-explanation">Actual: Positive (4.0) | Predicted: Negative</span>
+                                <button class="btn btn-primary" style="font-size: 0.75rem; padding: 0.3rem 0.65rem;" onclick="loadAndAnalyze('Product is what it is, but the companion app is very slow outside the U.S. and makes it annoying.')">Test Case</button>
+                            </div>
+                        </div>
+
+                        <!-- Case 4: Label Mismatches -->
+                        <div class="failure-case-card">
+                            <div>
+                                <div class="failure-case-title">4. Text-Rating Discrepancies</div>
+                                <p class="failure-case-desc">
+                                    Users sometimes make mistakes, typing a positive text but accidentally clicking 1 or 2 stars, or vice-versa. The model predicts correctly based on text, but is labeled as an "error".
+                                </p>
+                            </div>
+                            <div class="failure-case-example">
+                                "<strong>Good</strong>"
+                            </div>
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <span class="failure-case-explanation">Actual: Negative (2.0) | Predicted: Positive</span>
+                                <button class="btn btn-primary" style="font-size: 0.75rem; padding: 0.3rem 0.65rem;" onclick="loadAndAnalyze('Good')">Test Case</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab 3: Dataset Errors Explorer -->
+            <div id="tabContentExplorer" class="tab-content">
+                <div class="filter-bar">
+                    <div class="filter-group">
+                        <label for="explorerFilterProduct" style="font-size: 0.85rem; color: var(--text-secondary);">Product Filter:</label>
+                        <select id="explorerFilterProduct" class="filter-select" onchange="filterExplorerTable()">
+                            <option value="all">All Products</option>
+                            <option value="Amazon Tap - Alexa-Enabled Portable Bluetooth Speaker">Amazon Tap</option>
+                            <option value="Amazon Premium Headphones">Premium Headphones</option>
+                            <option value="Amazon Fire TV">Amazon Fire TV</option>
+                            <option value="Fire HD 6 Tablet">Fire HD 6 Tablet</option>
+                            <option value="Kindle Fire HDX 7\"">Kindle Fire HDX 7"</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <label for="explorerFilterErrorType" style="font-size: 0.85rem; color: var(--text-secondary);">Analysis Type:</label>
+                        <select id="explorerFilterErrorType" class="filter-select" onchange="filterExplorerTable()">
+                            <option value="false_positives">False Positives (Predicted Pos, Actually Neg)</option>
+                            <option value="false_negatives">False Negatives (Predicted Neg, Actually Pos)</option>
+                            <option value="neutral_reviews">Neutral Reviews (Rating 3.0 Slices)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="table-container">
+                    <table class="explorer-table" id="explorerTable">
+                        <thead>
+                            <tr>
+                                <th style="width: 15%">Product</th>
+                                <th style="width: 45%">Review Text</th>
+                                <th style="width: 8%; text-align: center;">Rating</th>
+                                <th style="width: 12%; text-align: center;">Confidence</th>
+                                <th style="width: 20%">Model Unreliability Analysis</th>
+                            </tr>
+                        </thead>
+                        <tbody id="explorerTableBody">
+                            <!-- Rows loaded dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer style="text-align: center; font-size: 0.8rem; color: var(--text-muted); padding: 1.5rem 0;">
+            <p>IIT Himshikhar Track - Applied NLP Mini Project 4 | Developed by Kunal</p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

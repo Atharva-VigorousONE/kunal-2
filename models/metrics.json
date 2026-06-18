@@ -1,0 +1,390 @@
+{
+    "overall": {
+        "metrics": {
+            "accuracy": 0.9318181818181818,
+            "precision": 0.5217391304347826,
+            "recall": 0.631578947368421,
+            "f1_score": 0.5714285714285714,
+            "confusion_matrix": [
+                [
+                    12,
+                    7
+                ],
+                [
+                    11,
+                    234
+                ]
+            ]
+        },
+        "total_samples": 1053,
+        "pos_samples": 977,
+        "neg_samples": 76,
+        "neu_samples": 124
+    },
+    "products": {
+        "Amazon Tap - Alexa-Enabled Portable Bluetooth Speaker": {
+            "metrics": {
+                "accuracy": 0.9781021897810219,
+                "precision": 0.0,
+                "recall": 0.0,
+                "f1_score": 0.0,
+                "confusion_matrix": [
+                    [
+                        0,
+                        2
+                    ],
+                    [
+                        1,
+                        134
+                    ]
+                ]
+            },
+            "total_samples": 542,
+            "pos_samples": 497,
+            "neg_samples": 17,
+            "neu_samples": 28
+        },
+        "Amazon Premium Headphones": {
+            "metrics": {
+                "accuracy": 1.0,
+                "precision": 1.0,
+                "recall": 1.0,
+                "f1_score": 1.0,
+                "confusion_matrix": [
+                    [
+                        0,
+                        0
+                    ],
+                    [
+                        0,
+                        9
+                    ]
+                ]
+            },
+            "total_samples": 77,
+            "pos_samples": 39,
+            "neg_samples": 0,
+            "neu_samples": 38
+        },
+        "Amazon Fire TV": {
+            "metrics": {
+                "accuracy": 1.0,
+                "precision": 1.0,
+                "recall": 1.0,
+                "f1_score": 1.0,
+                "confusion_matrix": [
+                    [
+                        1,
+                        0
+                    ],
+                    [
+                        0,
+                        6
+                    ]
+                ]
+            },
+            "total_samples": 44,
+            "pos_samples": 37,
+            "neg_samples": 6,
+            "neu_samples": 1
+        },
+        "Fire HD 6 Tablet": {
+            "metrics": {
+                "accuracy": 1.0,
+                "precision": 1.0,
+                "recall": 1.0,
+                "f1_score": 1.0,
+                "confusion_matrix": [
+                    [
+                        0,
+                        0
+                    ],
+                    [
+                        0,
+                        6
+                    ]
+                ]
+            },
+            "total_samples": 38,
+            "pos_samples": 38,
+            "neg_samples": 0,
+            "neu_samples": 0
+        },
+        "Kindle Fire HDX 7\"": {
+            "metrics": {
+                "accuracy": 1.0,
+                "precision": 1.0,
+                "recall": 1.0,
+                "f1_score": 1.0,
+                "confusion_matrix": [
+                    [
+                        0,
+                        0
+                    ],
+                    [
+                        0,
+                        8
+                    ]
+                ]
+            },
+            "total_samples": 23,
+            "pos_samples": 23,
+            "neg_samples": 0,
+            "neu_samples": 0
+        }
+    },
+    "false_positives": [
+        {
+            "product": "Amazon Tap - Alexa-Enabled Portable Bluetooth Speaker",
+            "message": "While it seemed to work fine, the Tap does not have the open mic feature. While that can be best for some, I bought it as a gift and they would prefer one that listens. The Tap makes you press the mic button every time you wish to communicate with Alexa, which seems to defeat the purpose.",
+            "rating": 2.0,
+            "probability": 0.8463460701435678,
+            "analysis": "Misclassified as Positive due to positive descriptors overriding subtle complaints or negative qualifiers that were out-of-vocabulary."
+        },
+        {
+            "product": "Amazon Tap - Alexa-Enabled Portable Bluetooth Speaker",
+            "message": "I habe the echo and I bought this one fort my son's room but it's not as user friendly. I wish I would've just bought the other one.",
+            "rating": 2.0,
+            "probability": 0.7483577427794915,
+            "analysis": "Misclassified as Positive due to positive descriptors overriding subtle complaints or negative qualifiers that were out-of-vocabulary."
+        },
+        {
+            "product": "Amazon 5W USB Official OEM Charger and Power Adapter for Fire Tablets and Kindle eReaders",
+            "message": "very overpriced!",
+            "rating": 2.0,
+            "probability": 0.5857316653839924,
+            "analysis": "Misclassified as Positive due to positive descriptors overriding subtle complaints or negative qualifiers that were out-of-vocabulary."
+        },
+        {
+            "product": "All-New Amazon Fire 7 Tablet Case (7th Generation",
+            "message": "I bought this case at the same time I bought a new Fire tablet during Prime days. It was recommended on the tablet page, so I thought I was getting the right case. Well, it doesn't fit - not by a long shot. Then I realized the case was for a new Fire for 2017 (like mine) but 7th generation, not 8th. Since it does not fit, I now have to return it. And at my expense (arg!) I can't even exchange it for a new one because apparently Amazon does not make this case for the 8th generation Fire yet. You update one of your products, then release it, but you don't put out a case for it at the same time WTH Amazon When will you start selling Amazon cases for the Amazon Fire 8th generation I'm NOT happy with Amazon right now and am wondering whether I should keep the tablet if I can't get a case for it that has the vertical stand feature that the Amazon case has.",
+            "rating": 1.0,
+            "probability": 0.5685058830827314,
+            "analysis": "Misclassified as Positive due to positive descriptors overriding subtle complaints or negative qualifiers that were out-of-vocabulary."
+        },
+        {
+            "product": "Amazon Fire TV Game Controller",
+            "message": "This is a great controller for our Fire TV, I purchased 2 of them, with two problems but let me first talk about the good. The controller works well for most of the games we play on the Fire TV. It has a long range compared to other controllers Ive tried (solid at 30 feet) and uses WiFi Direct instead of Bluetooth. The feel of it is decent (not too rubbery) and none of the buttons, D-Pad, or sticks have stuck or given us a problem. The microphone on it works as good or better than the one on the Fire TV remote.Now on to the problems. Its such an issue that Im not just putting it in the cons section but am going to tell you a bit about it. The worst problem is the battery life! In fact, its such a huge problem that Im taking off 2 stars because of it. This controller eats batteries like nobodys business. I have tried regular AA batteries (both Duracell and Energizer), expensive AA batteries (both Duracell and Energizer), and rechargeable AA batteries (Ive tried Energizer, Apple, AmazonBasics). The controller doesnt drain the batteries completely, nope. That I would understand. Instead, the controller stops working after only a 40 drain. I kid you not. Every set of batteries I have put into this thing has stopped working when there is still 60 battery life left. I have tested each set, before and after, using a generic battery tester as well as an ohm meter.The second problem may not be the controller itself, it may be the Fire TV, but its affecting the controller. The controller randomly disconnects. Not often enough for it to be a huge issue but just enough for it to be annoying. I have seen reports of others having the same problem with the controller and the remote. Im hoping that this issue will be fixed with a firmware update.Read more",
+            "rating": 2.0,
+            "probability": 0.5506814885586733,
+            "analysis": "Logistical complaint mismatch: The user praised the product but rated it 1-star due to excessive shipping fees. The text contains product-positive vocabulary, causing misclassification."
+        },
+        {
+            "product": "All-New Amazon Fire TV Game Controller",
+            "message": "This is a great controller for our Fire TV, I purchased 2 of them, with two problems but let me first talk about the good. The controller works well for most of the games we play on the Fire TV. It has a long range compared to other controllers Ive tried (solid at 30 feet) and uses WiFi Direct instead of Bluetooth. The feel of it is decent (not too rubbery) and none of the buttons, D-Pad, or sticks have stuck or given us a problem. The microphone on it works as good or better than the one on the Fire TV remote.Now on to the problems. Its such an issue that Im not just putting it in the cons section but am going to tell you a bit about it. The worst problem is the battery life! In fact, its such a huge problem that Im taking off 2 stars because of it. This controller eats batteries like nobodys business. I have tried regular AA batteries (both Duracell and Energizer), expensive AA batteries (both Duracell and Energizer), and rechargeable AA batteries (Ive tried Energizer, Apple, AmazonBasics). The controller doesnt drain the batteries completely, nope. That I would understand. Instead, the controller stops working after only a 40 drain. I kid you not. Every set of batteries I have put into this thing has stopped working when there is still 60 battery life left. I have tested each set, before and after, using a generic battery tester as well as an ohm meter.The second problem may not be the controller itself, it may be the Fire TV, but its affecting the controller. The controller randomly disconnects. Not often enough for it to be a huge issue but just enough for it to be annoying. I have seen reports of others having the same problem with the controller and the remote. Im hoping that this issue will be fixed with a firmware update.Read more",
+            "rating": 2.0,
+            "probability": 0.5506814885586733,
+            "analysis": "Logistical complaint mismatch: The user praised the product but rated it 1-star due to excessive shipping fees. The text contains product-positive vocabulary, causing misclassification."
+        }
+    ],
+    "false_negatives": [
+        {
+            "product": "Amazon 5W USB Official OEM Charger and Power Adapter for Fire Tablets and Kindle eReaders",
+            "message": "Very expensive charger. I think the kindle should come with it as does all other tablets, including the fire, which is way cheaper and includes the charger for just 50. It is a pretty large charger though and doesn't fit in the kindle box with the kindle, at all.",
+            "rating": 4.0,
+            "probability": 0.8250592026700897,
+            "analysis": "Product-Logistics conflict: The user complained about the price ('expensive', 'should come with it'), but ultimately rated it 4 stars because the product functions well. The model over-indexed on the financial complaint."
+        },
+        {
+            "product": "Certified Refurbished Fire HD 10 Tablet",
+            "message": "I purposely waited almost 4 months before leaving a review. I wanted to see if any issues developed before leaving feedback. I was not disappointed. The refurbished fire arrived in perfect condition, no scratches or wear. I purchased a screen cover immediately to insure it would remain in good shape. After 4 months, it works like a champ. No issues whatsoever. VERY PLEASED and would not hesitate purchasing refurbished item again. Amazon has ALWAYS treated me superbly with any issues I might have with orders or returns.",
+            "rating": 5.0,
+            "probability": 0.666267096557345,
+            "analysis": "Negation handling failure: The text uses double-negatives ('not disappointed', 'no scratches', 'no issues') to convey praise. The model associated 'disappointed', 'scratches', and 'issues' with negative sentiment."
+        },
+        {
+            "product": "Replacement Remote for Amazon Fire TV Stick",
+            "message": "Well what to say This is a replacement remote, did I buy it due to one not working Nope the kids lost it and I wanted another till I could find it. Paring it was simple, hold the home button for around 10-15 seconds to let the fire stick find it and then Boom your all set to go!Works just like the original that came with it so no worries there.",
+            "rating": 5.0,
+            "probability": 0.6556985167895087,
+            "analysis": "Negation handling failure: The review contains phrases like 'no worries' (positive) and 'no clue' (neutral context), but the model misattributed negative weight to 'worries'."
+        },
+        {
+            "product": "Replacement Remote for Amazon Fire TV Stick",
+            "message": "Product is what it is: if you're like me and moved and have NO CLUE where this little remote ended up, this is the one you need to replace it. It's exactly the same as the one that came with your Fire Stick. However, there are no instructions in the box, so if you haven't ordered the replacement yet, make a note: HOLD THE HOME KEY.That's all you have to do to pair this controller. Hold the home key for around 10-15 seconds, and it'll connect. You're welcome.",
+            "rating": 5.0,
+            "probability": 0.6505850540786079,
+            "analysis": "Negation handling failure: The review contains phrases like 'no worries' (positive) and 'no clue' (neutral context), but the model misattributed negative weight to 'worries'."
+        },
+        {
+            "product": "Replacement Remote for Amazon Fire TV Stick",
+            "message": "It's small and I don't miss voice interface. This is a 2nd one because my significant other and I like our own remotes.What I wasn't sure about was if the Amazon Fire TV would support more than one remote. But it does! You just have to register it with the Amazon Fire TV's device settings.",
+            "rating": 5.0,
+            "probability": 0.6409308310749626,
+            "analysis": "Misclassified as Negative because the review contains criticism, but the user ultimately left a high star rating due to overall product utility."
+        },
+        {
+            "product": "Echo Show - Black",
+            "message": "I waited two days to set up Show to give myself a reward for working. I read the majority of the reviews already posted. I have no idea why there is even a one-star review.Setup was a breeze. My Ring Pro screen pops up brilliantly. Nest cameras, too. Played Adele at the maximum volume and sang along with the lyrics Show trickled on the screen.As far as those who boo hoo over the headlines Show displays, you can give her the voice command of DND. Problem solved. Then, just tell her to wake up.I followed the simple instructions on how to change the generic photo on Show's home screen. Easy peasy.Granted, I haven't made a video call yet. Waiting for my folks to get in the game and buy Show.I'm not a lover of all things Amazon. I bought the newest Fire Tablet but returned it after a week. Show redeemed Amazon.If yours isn't working, you either got a dud or you're not doing something right.",
+            "rating": 5.0,
+            "probability": 0.6401897610564973,
+            "analysis": "Misclassified as Negative because the review contains criticism, but the user ultimately left a high star rating due to overall product utility."
+        }
+    ],
+    "neutral_reviews": [
+        {
+            "product": "Kindle Keyboard",
+            "message": "The Kindle is my first e-ink reader. I own an iPad, an iPhone, and have owned a Windows-based phone in the past that I used as an ereader.My overall impression of the device is good.The good:I'd honestly rather read linear (read from page one to the end, one page at a time) fiction from it than a book, because I can't always get comfortable with a book. Hardcovers are sometimes a bit heavy, and paperbacks don't always lie open easily. The Kindle is incredibly light and thin. I can hold it in one hand easily. The page turn buttons are conveniently located. Page-turns aren't instant, but they're probably quicker than turning a physical page in a printed book (there are just a lot more page-turns unless you choose a small font). The contrast is better than other ereaders I've seen. There is zero eye strain in good light. My eyesight isn't the greatest and I like being able to increase the font size and read without glasses. I love being able to browse the Kindle store and read samples before deciding to purchase. The experimental browser is surprisingly usable, but isn't great. It is useful for browsing wikipedia and blogs. The biggest drawback to the browser is the awkward pointer navigation, using the 5-way pad. It syncs your furthest read page over the internet so you can pick up where you left off using your iPhone or iPad.The so-so:The kindle store could use more categories and sorting options. You can't sort by top rated, and there is no category for alternate histories, for example. Finding a very-specific type of fiction relies on keyword searches, which don't do a great job. The wifi sometimes doesn't connect before it times-out.Read more",
+            "rating": 3.0,
+            "predicted_label": "positive",
+            "probability": 0.7262248177368207,
+            "analysis": "Rating 3.0 reviews typically contain mixed sentiments. The model predicts bias based on the dominant bag-of-words coefficients."
+        },
+        {
+            "product": "Kindle Keyboard",
+            "message": "The Kindle is my first e-ink reader. I own an iPad, an iPhone, and have owned a Windows-based phone in the past that I used as an ereader.My overall impression of the device is good.The good:I'd honestly rather read linear (read from page one to the end, one page at a time) fiction from it than a book, because I can't always get comfortable with a book. Hardcovers are sometimes a bit heavy, and paperbacks don't always lie open easily. The Kindle is incredibly light and thin. I can hold it in one hand easily. The page turn buttons are conveniently located. Page-turns aren't instant, but they're probably quicker than turning a physical page in a printed book (there are just a lot more page-turns unless you choose a small font). The contrast is better than other ereaders I've seen. There is zero eye strain in good light. My eyesight isn't the greatest and I like being able to increase the font size and read without glasses. I love being able to browse the Kindle store and read samples before deciding to purchase. The experimental browser is surprisingly usable, but isn't great. It is useful for browsing wikipedia and blogs. The biggest drawback to the browser is the awkward pointer navigation, using the 5-way pad. It syncs your furthest read page over the internet so you can pick up where you left off using your iPhone or iPad.The so-so:The kindle store could use more categories and sorting options. You can't sort by top rated, and there is no category for alternate histories, for example. Finding a very-specific type of fiction relies on keyword searches, which don't do a great job. The wifi sometimes doesn't connect before it times-out.Read more",
+            "rating": 3.0,
+            "predicted_label": "positive",
+            "probability": 0.7262248177368207,
+            "analysis": "Rating 3.0 reviews typically contain mixed sentiments. The model predicts bias based on the dominant bag-of-words coefficients."
+        },
+        {
+            "product": "Amazon Echo Dot Case (fits Echo Dot 2nd Generation only) - Indigo Fabric",
+            "message": "Like a previous reviewer mentioned it is fabric over hard plastic it is not a snug or tight fit. Good quality though.",
+            "rating": 3.0,
+            "predicted_label": "positive",
+            "probability": 0.5124186694590719,
+            "analysis": "Rating 3.0 reviews typically contain mixed sentiments. The model predicts bias based on the dominant bag-of-words coefficients."
+        },
+        {
+            "product": "Kindle Fire HDX 8.9\"",
+            "message": "Updated 12/8/2014One year in...This review is for the the no-ad 64 GB wifi-only HDX 8.9.I use a Galaxy S5 Android smartphone so the HDX is for media / web surfing / offline viewing for travel. Since I had already been using Amazon Prime and Prime Music it was a no brainer for me to use the HDX to fill the role of media / web surfing on a tablet.Be informed about the download limitations to this device. Amazon has been adding clarification to this which should help would-be purchasers make a more informed opinion. This wasn't as obvious as it should have been when I ordered mine so they're listening which is good.Be aware that their most popular Prime content *may* not be available to download (and save) to your HDX. You can save certain videos to your HDX but you won't know which ones until you buy an HDX and try it out. *** Edited 12/21/2013 You can now see a list of Prime movies and shows that can be downloaded to the device. That's an improvement and more clearly shows the available downloadable Prime content. +1 for Amazon. ***I was also under the assumption that you could download as many videos as you'd like with the limiting factor being the memory capacity of the HDX. Also NOT the case. So again, I bought the larger capacity HDX under this assumption. That was dumb on my part as it turns out because you're not limited by storage capacity. You're limited the NUMBER of downloads you can have on your device. Kids' content can be really short so you may find yourself running into that limitation, but most people never will.Read more",
+            "rating": 3.0,
+            "predicted_label": "positive",
+            "probability": 0.7645375393915372,
+            "analysis": "Rating 3.0 reviews typically contain mixed sentiments. The model predicts bias based on the dominant bag-of-words coefficients."
+        },
+        {
+            "product": "Kindle Fire HDX 8.9\"",
+            "message": "Cons:1. Built on Android does not mean you can have Google Play Apps. This is an unfortunate inconvenience, as there are some Google Apps that are just better than their Amazon App counterparts, and a few that I can not find within the Amazon Apps. If you want a fully functional tablet, then buy a tablet and download the free kindle app. If you want to pay more for something that does less, then the kindle is for you. This was a gift, so I will keep it, and continue to use my phone for the rest of my Apps that are not available on the kindle.2. Camera is less than perfect. Limited settings available. Again, I will use my phone for pics, the same scene with my phone showed the flames, with a small amount of glare. (Husband is a firefighter, so I take a lot of pictures of their exercises for their training.) An old Casio Exilim C721 phone with 5MP camera still takes better pictures at night.3. Kindle unlimited... I can not find anything worthy of paying a subscription price every month for. The Authors I want to read are not included.4. Amazon Prime... See 3, They doubled the price, and to me I just don't see anything there worthy of the cost, including Amazon instant video, no shows that I watch are included. Another family member did the 30 day trial, and was quite disappointed when his content disappeared after the trial.5. Youtube videos work ok, sometimes choppy, could be my connection or the device (computer playback worked fine when I had the time to test simutaneously). Other online video from various sources would not play in Silk Browser, refer to 1 Chrome Browser not available to download.6. Office Suite... I can not figure out how to unlock documents. I can view them, but I can not edit them.Somewhere in the middle:1.Read more",
+            "rating": 3.0,
+            "predicted_label": "positive",
+            "probability": 0.567668452804326,
+            "analysis": "Rating 3.0 reviews typically contain mixed sentiments. The model predicts bias based on the dominant bag-of-words coefficients."
+        }
+    ],
+    "top_positive_words": [
+        {
+            "word": "great",
+            "coefficient": 2.6907365700266026
+        },
+        {
+            "word": "alexa",
+            "coefficient": 2.0158243155310642
+        },
+        {
+            "word": "love",
+            "coefficient": 1.6669722862449745
+        },
+        {
+            "word": "echo",
+            "coefficient": 1.4653835711644612
+        },
+        {
+            "word": "gift",
+            "coefficient": 1.2848012402311386
+        },
+        {
+            "word": "easy",
+            "coefficient": 1.235529520628117
+        },
+        {
+            "word": "look",
+            "coefficient": 1.1580112137924323
+        },
+        {
+            "word": "paperwhite",
+            "coefficient": 1.0884907682535163
+        },
+        {
+            "word": "best",
+            "coefficient": 1.072278932716275
+        },
+        {
+            "word": "tap",
+            "coefficient": 1.0460350958903892
+        },
+        {
+            "word": "sound",
+            "coefficient": 1.016923725793549
+        },
+        {
+            "word": "read",
+            "coefficient": 0.9773932057559828
+        },
+        {
+            "word": "play",
+            "coefficient": 0.9622937156071695
+        },
+        {
+            "word": "recommend",
+            "coefficient": 0.9596960877472249
+        },
+        {
+            "word": "headphones",
+            "coefficient": 0.9594411944531386
+        }
+    ],
+    "top_negative_words": [
+        {
+            "word": "remote",
+            "coefficient": -2.1706216429721104
+        },
+        {
+            "word": "months",
+            "coefficient": -1.8570450318588307
+        },
+        {
+            "word": "weeks",
+            "coefficient": -1.785408712138795
+        },
+        {
+            "word": "doesn",
+            "coefficient": -1.5788953611832095
+        },
+        {
+            "word": "charger",
+            "coefficient": -1.5158707244195888
+        },
+        {
+            "word": "just",
+            "coefficient": -1.4735385893883912
+        },
+        {
+            "word": "working",
+            "coefficient": -1.4547697144027296
+        },
+        {
+            "word": "different",
+            "coefficient": -1.446021940567449
+        },
+        {
+            "word": "netflix",
+            "coefficient": -1.4093399192939084
+        },
+        {
+            "word": "screen",
+            "coefficient": -1.4025133703959007
+        },
+        {
+            "word": "instructions",
+            "coefficient": -1.402298397161517
+        },
+        {
+            "word": "thought",
+            "coefficient": -1.3743985706499238
+        },
+        {
+            "word": "question",
+            "coefficient": -1.346468656963211
+        },
+        {
+            "word": "app",
+            "coefficient": -1.323276137055647
+        },
+        {
+            "word": "freetime",
+            "coefficient": -1.264298865020807
+        }
+    ]
+}
